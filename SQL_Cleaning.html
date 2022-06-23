@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Data Cleaning with SQL</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"></span><span class="title">Scott Merchant Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="Bio.html">Bio</a></li>
+					</ul>
+				</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Data Cleaning with SQL</h1>
+							<p>You can visit my <a href="https://github.com/ssmerchant/sql-data-cleaning-project">Github Repository</a> to download the code and data used in this project.</p>
+							<p>This dataset contains over 50,000 records of data about housing in Nashville. It includes owner info, addresses, property value, dates sold, and much more. This dataset had many missing addresses, duplicate records, and dates with bad format. My goal for this project is to import the data to SQL Server and clean it so that it is more useable and looks better.</p>
+							<p>After importing the Data to SQL Server, we see that the Sale Date Column has a lot of extra numbers. I want to format the column to keep only the date, and get rid of the time.</p>
+							<span class="image"><img src="images/SaleDate.jpg" alt="" /></span><p></p>
+							<p>The query below converts the data to a standad date format, and updates the table with the newly formatted data.</p>
+							<pre><code>--Select Data
+
+Select * From [Nashville Housing Data].[dbo].[Nashville_housing_data]
+
+-- Standardize Date
+								
+Alter Table [Nashville_housing_data]
+Add SaleDate Date;
+						
+Update [Nashville_housing_data]
+SET SaleDate = CONVERT(Date, [Sale Date])
+								
+Select [SaleDate]
+From [Nashville Housing Data].[dbo].[Nashville_housing_data]</code></pre>
+							<p>This Formatted Date looks a lot cleaner without all the extra info.</p>
+							<span class="image"><img src="images/SaleDateClean.jpg" alt="" /></span><p></p>
+							<p>There are missing addresses in the Property Address Column. There are also records of addresses with a Parcel ID that correspond to the Parcel ID of the missing values. Since these records share the same Parcel ID, it makes sense that they would also be the correct address. I'll use the addresses from those matching records to fill in the missing data.</p>
+							<pre><code>-- Property Address Cleaning
+-- Populating null values with data found from other values with the same Parcel ID
+								
+Select *
+From [Nashville Housing Data].[dbo].[Nashville_housing_data]
+order by [Parcel ID]
+							
+Select a.[Parcel ID], a.[Property Address], b.[Parcel ID], b.[Property Address], ISNULL(a.[Property Address], b.[Property Address])
+From [Nashville Housing Data].[dbo].[Nashville_housing_data] a
+JOIN [Nashville Housing Data].[dbo].[Nashville_housing_data] b
+	on a.[Parcel ID] = b.[Parcel ID]
+	AND a.[F1] <> b.[F1]
+where a.[Property Address] is null
+								
+Update a
+Set [Property Address] = ISNULL(a.[Property Address], b.[Property Address])
+From [Nashville Housing Data].[dbo].[Nashville_housing_data] a
+JOIN [Nashville Housing Data].[dbo].[Nashville_housing_data] b
+	on a.[Parcel ID] = b.[Parcel ID]
+	AND a.[F1] <> b.[F1]
+where a.[Property Address] is null
+								
+--Removing any remaining null values with no address recorded
+				
+Delete from [Nashville Housing Data].[dbo].[Nashville_housing_data]
+where [Property Address] is null;</code></pre>
+							<p>Now, I'll check for and remove any duplicate records in the table.</p>
+							<pre><code>--Removing Duplicate Data
+								
+with RowNumCTE AS(
+Select *,
+ROW_NUMBER() OVER(
+	Partition by [Parcel ID],
+				 [Property Address],
+				 [Sale Price],
+				 [Sale Date],
+				 [Legal Reference]
+				 Order by
+					F1
+					) row_num
+					
+From [Nashville Housing Data].[dbo].[Nashville_housing_data]
+)
+Delete
+From RowNumCTE
+Where row_num > 1
+					
+--Selecting data to check for duplicates
+								
+with RowNumCTE AS(
+Select *,
+	ROW_NUMBER() OVER(
+	Partition by [Parcel ID],
+				 [Property Address],
+				 [Sale Price],
+				 [Sale Date],
+				 [Legal Reference]
+				 Order by
+					F1
+					) row_num
+						
+From [Nashville Housing Data].[dbo].[Nashville_housing_data]
+)
+Select *
+From RowNumCTE
+Where row_num > 1
+Order by [Property Address]</code></pre>
+							<p>And finally, removing any unused or irrelevant columns.</p>
+							<pre><code>--Deleting unused columns
+								
+Select *
+From [Nashville Housing Data].[dbo].[Nashville_housing_data]
+								
+Alter table [Nashville Housing Data].[dbo].[Nashville_housing_data]
+drop column [Unnamed: 0], [Sale Date], [Tax District]
+							</code></pre>
+							<p>This dataset is now clean and uniform and ready for use in later projects.</p>
+						</div>
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<div class="inner">
+						<h2>Connect</h2>
+						</div>
+					<div class="inner">
+						<ul>
+							<li><a href="https://www.linkedin.com/in/scott-merchant-71287a238/">LinkedIn</a></li>
+							<li><a href="https://github.com/ssmerchant">Github</a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Untitled. All rights reserved</li>
+						</ul>
+					</div>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

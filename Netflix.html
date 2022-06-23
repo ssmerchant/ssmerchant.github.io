@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Netflix Original Films Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+							<a href="index.html" class="logo">
+								<span class="symbol"></span><span class="title">Scott Merchant Portfolio</span>
+							</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="Bio.html">Bio</a></li>
+					</ul>
+				</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Netflix Original Films Analysis</h1>
+							<p>In this project, I analyzed data from Netflix Original Films & IMDB Scores. The data set contains info about Original films produced by Netflix up until June 1st, 2021. The data and code used in this project can be found <a href="https://github.com/ssmerchant/netflix-originals">here.</a></p>
+							<p>The objective I had in mind when starting this project was to create an interactive dashboard to display the most popular release times as well as which genres Netflix performs the best in. On the "Netflix Originals" dashboard, the release day, month, and year are displayed. On the "Distribution of IMDB Scores" dashboard, the score distribution for all movies is displayed as well as the correlation between film runtime and score. Both of these dashboards can be filtered to display all info based on the top 5 genres.</p>
+							<div class='tableauPlaceholder' id='viz1654716292140' style='position: relative'><noscript><a href='#'><img alt='Netflix Originals ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixOriginalsDashboard&#47;NetflixOriginals&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='NetflixOriginalsDashboard&#47;NetflixOriginals' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixOriginalsDashboard&#47;NetflixOriginals&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1654716292140');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1366px';vizElement.style.height='795px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1366px';vizElement.style.height='795px';} else { vizElement.style.width='100%';vizElement.style.height='1327px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+							<p></p>
+							<div class='tableauPlaceholder' id='viz1654716209822' style='position: relative'><noscript><a href='#'><img alt='Distribution of IMDB Scores ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixOriginalsDistributionofIMDBScores&#47;DistributionCorrelationofIMDBScores&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='NetflixOriginalsDistributionofIMDBScores&#47;DistributionCorrelationofIMDBScores' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ne&#47;NetflixOriginalsDistributionofIMDBScores&#47;DistributionCorrelationofIMDBScores&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1654716209822');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1027px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script></p>
+							<p>The following charts shows which languages were used the most, and the 10 movies that recieved the best and worst scores from IMDB.</p>
+							<span class="image"><img src="images/languages.jpg" alt="" /></span></p>
+							<span class="image"><img src="images/10highest.jpg" alt="" /></span>
+							<span class="image"><img src="images/10lowest.jpg" alt="" /></span></p>
+							<p>The following Python code calculates the correlation coefficients between Runtime, Year, and IMDB Score.</p>
+							<pre><code>import pandas as pd
+
+#read Runtime, Year,  and IMDB Scores from csv
+fields = ['Runtime','Year', 'IMDB Score']
+data = pd.read_csv(r'D:\\Projects\\NetflixOriginalFilms\\NetflixOriginalsCSV.csv', usecols = fields, encoding = 'latin1')
+								
+#Finding correlation between Runtime/Year/IMDB Scores
+corr = data.loc[:,fields].corr()
+							
+print(corr)</code></pre>
+							<p>Running this code calculates a correlation coefficient of -0.041872 between runtime and score, and -0.140982 between year released and score. This means that the runtime of a film and year released have almost no impact on its IMDB score.</p>
+							<h2>Conclusion</h2>
+							<ul>
+								<li>The length and release date of a film has basically no impact on its IMDB score.</li>
+								<li>Documentaries, Dramas, and Comedies are the top 3 genres at Netflix, making up almost half of all films they produce.</li>
+								<li>Most films are in English, Hindi, or Spanish.</li>
+								<li>Most films have an IMDB rating between 5.0 and 7.5.</li>
+								<li>Netflix have continued to produce more films each successive year. (2021 wasn't over at the time this data was created.)</li>
+								<li>Netflix's best performing genre was their documentaries</li>
+								</ul>
+						</div>
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<div class="inner">
+						<h2>Connect</h2>
+						</div>
+					<div class="inner">
+						<ul>
+							<li><a href="https://www.linkedin.com/in/scott-merchant-71287a238/">LinkedIn</a></li>
+							<li><a href="https://github.com/ssmerchant">Github</a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Untitled. All rights reserved</li>
+						</ul>
+					</div>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
